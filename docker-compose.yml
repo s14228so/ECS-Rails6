@@ -1,0 +1,43 @@
+version: '2'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/rails/Dockerfile
+    # command: bundle exec unicorn -p 3000 -c /app/config/unicorn.rb
+    command: bundle exec puma -p 3000 -b 0.0.0.0 -C config/puma.rb -d
+    ports:
+      - '3000:3000'
+    volumes:
+      - /var/tmp
+      - .:/app
+    depends_on:
+      - db
+    extends:
+      file: ./docker/mysql/password.yml
+      service: password
+  db:
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    ports:
+      - '3306:3306'
+    volumes:
+      ## 下で用意したdb_dataとマウント共有。 /var/lib/mysqlがデータディレクトリ
+      - db_data:/var/lib/mysql
+    extends:  ##拡張
+      file: ./docker/mysql/password.yml
+      service: password
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - '80:80'
+      #他のサービスのボリュームをマウント 実際にnginxのコンテナの中にappディレクトリが存在している。
+    volumes_from:
+      - app
+
+volumes:
+  db_data:
+
