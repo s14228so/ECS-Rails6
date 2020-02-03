@@ -15,3 +15,4 @@ ADD docker/rails/puma.rb /app/config/
 ADD . /app
 
 EXPOSE 3000
+

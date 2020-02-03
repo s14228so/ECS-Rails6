@@ -41,3 +41,5 @@ services:
 volumes:
   db_data:
 
+
+    ##docker-compose run --rm web rails new . --force --database=mysql  --skip-test --api
