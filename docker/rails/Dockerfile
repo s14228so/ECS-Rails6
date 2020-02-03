@@ -4,15 +4,17 @@ RUN apt-get update -qq && \
   build-essential \
   libpq-dev \
   nodejs \
-  default-mysql-client
+  default-mysql-client \
+  yarn
 RUN mkdir /app
 WORKDIR /app
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
 RUN bundle install -j4
-ADD docker/rails/puma.rb /app/config/
 
 ADD . /app
+
+RUN mkdir -p tmp/sockets
 
 EXPOSE 3000
 
