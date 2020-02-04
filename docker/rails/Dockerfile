@@ -1,18 +1,21 @@
 FROM ruby:2.6.3
+
 RUN apt-get update -qq && \
   apt-get install -y apt-utils \
   build-essential \
   libpq-dev \
   nodejs \
-  default-mysql-client
-RUN mkdir /app
+  default-mysql-client \
+  yarn
+
 WORKDIR /app
-ADD Gemfile /app/Gemfile
-ADD Gemfile.lock /app/Gemfile.lock
+
+ADD Gemfile .
+ADD Gemfile.lock .
 RUN bundle install -j4
-ADD docker/rails/puma.rb /app/config/
 
 ADD . /app
+
 
 EXPOSE 3000
 
