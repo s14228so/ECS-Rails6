@@ -1,4 +1,5 @@
 FROM ruby:2.6.3
+
 RUN apt-get update -qq && \
   apt-get install -y apt-utils \
   build-essential \
@@ -9,8 +10,8 @@ RUN apt-get update -qq && \
 
 WORKDIR /app
 
-ADD Gemfile /app/Gemfile
-ADD Gemfile.lock /app/Gemfile.lock
+ADD Gemfile .
+ADD Gemfile.lock .
 RUN bundle install -j4
 
 ADD . /app
