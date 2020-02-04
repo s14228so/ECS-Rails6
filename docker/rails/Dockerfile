@@ -6,15 +6,15 @@ RUN apt-get update -qq && \
   nodejs \
   default-mysql-client \
   yarn
-RUN mkdir /app
+
 WORKDIR /app
+
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
 RUN bundle install -j4
 
 ADD . /app
 
-RUN mkdir -p tmp/sockets
 
 EXPOSE 3000
 
