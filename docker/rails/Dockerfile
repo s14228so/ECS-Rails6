@@ -5,6 +5,7 @@ RUN apt-get update -qq && \
   build-essential \
   libpq-dev \
   nodejs \
+  vim \
   default-mysql-client \
   yarn
 

@@ -10,6 +10,7 @@ services:
     volumes:
       - .:/app
       - /var/tmp
+      - sockets:/app/tmp/sockets
     tty: true
     depends_on:
       - db
@@ -35,13 +36,13 @@ services:
     ports:
       - '80:80'
       #他のサービスのボリュームをマウント 実際にnginxのコンテナの中にappディレクトリが存在している。
-    volumes_from:
-      - app
+    volumes: 
+      - sockets:/app/tmp/sockets
     depends_on: 
       - app
 
 volumes:
   db_data:
-
+  sockets:
 
     ##docker-compose run --rm web rails new . --force --database=mysql  --skip-test --api
