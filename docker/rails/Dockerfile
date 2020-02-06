@@ -6,8 +6,7 @@ RUN apt-get update -qq && \
   libpq-dev \
   nodejs \
   vim \
-  default-mysql-client \
-  yarn
+  default-mysql-client 
 
 WORKDIR /app
 

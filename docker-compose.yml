@@ -10,6 +10,7 @@ services:
     volumes:
       - .:/app
       - /var/tmp
+      # socketファイルの共有
       - sockets:/app/tmp/sockets
     tty: true
     depends_on:
@@ -24,9 +25,8 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      ## 下で用意したdb_dataとマウント共有。 /var/lib/mysqlがデータディレクトリ
       - db_data:/var/lib/mysql
-    extends:  ##拡張
+    extends:  
       file: ./docker/mysql/password.yml
       service: password
   nginx:
@@ -35,7 +35,7 @@ services:
       dockerfile: ./docker/nginx/Dockerfile
     ports:
       - '80:80'
-      #他のサービスのボリュームをマウント 実際にnginxのコンテナの中にappディレクトリが存在している。
+      #socketファイルの共有
     volumes: 
       - sockets:/app/tmp/sockets
     depends_on: 
@@ -44,5 +44,3 @@ services:
 volumes:
   db_data:
   sockets:
-
-    ##docker-compose run --rm web rails new . --force --database=mysql  --skip-test --api
