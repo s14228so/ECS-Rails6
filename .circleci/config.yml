@@ -6,6 +6,7 @@ workflows:
   build_and_push_image:
     jobs:
       - aws-ecr/build-and-push-image:
+          name: Nginx Deploy
           account-url: AWS_ECR_ACCOUNT_URL
           region: AWS_REGION
           aws-access-key-id: AWS_ACCESS_KEY_ID
@@ -19,6 +20,7 @@ workflows:
             branches:
               only: master
       - aws-ecr/build-and-push-image:
+          name: Rails Deploy
           account-url: AWS_ECR_ACCOUNT_URL
           region: AWS_REGION
           aws-access-key-id: AWS_ACCESS_KEY_ID
