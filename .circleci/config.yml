@@ -3,10 +3,9 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.7.0
   aws-ecs: circleci/aws-ecs@1.1.0
 workflows:
-  build_and_push_image:
+  nginx-deploy:
     jobs:
       - aws-ecr/build-and-push-image:
-          name: Nginx Deploy
           account-url: AWS_ECR_ACCOUNT_URL
           region: AWS_REGION
           aws-access-key-id: AWS_ACCESS_KEY_ID
@@ -19,8 +18,14 @@ workflows:
           filters:
             branches:
               only: master
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: '${TASK_DEFINITION_NAME}-service'
+          cluster-name: '${ECS_ARN}'
+  rails-deploy:
+    jobs:
       - aws-ecr/build-and-push-image:
-          name: Rails Deploy
           account-url: AWS_ECR_ACCOUNT_URL
           region: AWS_REGION
           aws-access-key-id: AWS_ACCESS_KEY_ID
@@ -38,4 +43,5 @@ workflows:
             - aws-ecr/build-and-push-image
           family: '${TASK_DEFINITION_NAME}-service'
           cluster-name: '${ECS_ARN}'
+  
 #AWS_ECR_ACCOUNT_URL => ${アカウントID}.dkr.ecr.${リージョン}.amazonaws.com
