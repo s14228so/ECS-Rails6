@@ -8,7 +8,6 @@ workflows:
       - aws-ecr/build_and_push_image:
           account-url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
           region: ${AWS_DEFAULT_REGION}
-          tag: "${CIRCLE_SHA1}"
           aws-access-key-id: ${AWS_ACCESS_KEY_ID}
           aws-secret-access-key: ${AWS_SECRET_ACCESS_KEY}
           create-repo: true
