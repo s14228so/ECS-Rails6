@@ -4,7 +4,7 @@ orbs:
 workflows:
   build_and_push_image:
     jobs:
-      - aws-ecr/build_and_push_image:
+      - aws-ecr/build-and-push-image:
           account-url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
           region: ${AWS_DEFAULT_REGION}
           aws-access-key-id: ${AWS_ACCESS_KEY_ID}
