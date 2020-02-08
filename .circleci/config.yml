@@ -11,9 +11,9 @@ workflows:
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           create-repo: true
           path: ./docker/nginx
-          repo: "nginx"
-          tag: "latest"
-          workspace-root: ./docker/nginx
+          repo: nginx
+          tag: latest
+          dockerfile: DockerfilePRO
           filters:
             branches:
               only: master
