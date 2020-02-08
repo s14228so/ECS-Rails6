@@ -17,3 +17,4 @@ workflows:
           filters:
             branches:
               only: master
+#AWS_ECR_ACCOUNT_URL => ${アカウントID}.dkr.ecr.${リージョン}.amazonaws.com
