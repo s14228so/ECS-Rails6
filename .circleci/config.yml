@@ -13,7 +13,7 @@ workflows:
           path: ./docker/nginx
           repo: "nginx"
           tag: "latest"
-          workspace-root: "./docker/nginx"
+          workspace-root: ./docker/nginx
           filters:
             branches:
               only: master
