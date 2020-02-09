@@ -1,9 +1,7 @@
 version: '2'
 services:
   app:
-    build:
-      context: .
-      dockerfile: ./docker/rails/Dockerfile
+    build: ./docker/rails
     command: bundle exec puma -C config/puma.rb 
     ports:
       - '3000:3000'
@@ -19,7 +17,9 @@ services:
       file: ./docker/mysql/password.yml
       service: password
   db:
-    build: ./docker/mysql
+    build: 
+      context: .
+      dockerfile: docker/mysql/Dockerfile
     ports:
       - '3306:3306'
     volumes:
@@ -28,8 +28,7 @@ services:
       file: ./docker/mysql/password.yml
       service: password
   nginx:
-    build:
-      context: ./docker/nginx
+    build: ./docker/nginx
     ports:
       - '80:80'
       #socketファイルの共有
