@@ -21,8 +21,9 @@ workflows:
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
-          family: '${SERVICE_NAME}'
+          family: 'nginx-rails-app' # ECSのタスク定義名
           cluster-name: '${ECS_ARN}'
+          service-name: 'test'
           container-image-name-updates: "container=nginx,tag=${CIRCLE_SHA1}"
   # Railsのデプロイ
   rails-deploy:
@@ -42,8 +43,9 @@ workflows:
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
-          family: '${SERVICE_NAME}'
+          family: 'nginx-rails-app' # ECSのタスク定義名
           cluster-name: '${ECS_ARN}'
+          service-name: 'test'
           container-image-name-updates: "container=rails,tag=${CIRCLE_SHA1}"
 
   
