@@ -43,7 +43,7 @@ workflows:
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
-          family: '${TASK_DEFINITION_NAME}'
+          family: '${SERVICE_NAME}'
           cluster-name: '${ECS_ARN}'
   
 #AWS_ECR_ACCOUNT_URL => ${アカウントID}.dkr.ecr.${リージョン}.amazonaws.com
