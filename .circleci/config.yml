@@ -47,3 +47,4 @@ workflows:
           cluster-name: '${ECS_ARN}'
   
 #AWS_ECR_ACCOUNT_URL => ${アカウントID}.dkr.ecr.${リージョン}.amazonaws.com
+
