@@ -48,3 +48,4 @@ workflows:
   
 #AWS_ECR_ACCOUNT_URL => ${アカウントID}.dkr.ecr.${リージョン}.amazonaws.com
 
+arn:aws:ecs:ap-northeast-1:934181357415:cluster/unko
