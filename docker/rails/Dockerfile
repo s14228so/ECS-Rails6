@@ -10,11 +10,11 @@ RUN apt-get update -qq && \
 
 WORKDIR /app
 
-ADD ../../Gemfile .
-ADD ../../Gemfile.lock .
+ADD Gemfile .
+ADD Gemfile.lock .
 RUN bundle install -j4
 
-ADD ../../. /app
+ADD . /app
 
 
 EXPOSE 3000
