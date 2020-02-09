@@ -14,17 +14,16 @@ workflows:
           create-repo: true
           path: ./docker/nginx
           repo: nginx
-          tag: latest
-          dockerfile: DockerfilePRO
+          tag: "${CIRCLE_SHA1}"
           filters:
             branches:
               only: master
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
-          family: '${TASK_DEFINITION_NAME}'
+          family: '${SERVICE_NAME}'
           cluster-name: '${ECS_ARN}'
-          container-image-name-updates: "container=nginx,tag=latest"
+          container-image-name-updates: "container=nginx,tag=${CIRCLE_SHA1}"
   # Railsのデプロイ
   rails-deploy:
     jobs:
@@ -36,8 +35,7 @@ workflows:
           create-repo: true
           path: ./docker/rails
           repo: rails
-          tag: latest
-          dockerfile: DockerfilePRO
+          tag: "${CIRCLE_SHA1}"
           filters:
             branches:
               only: master
@@ -46,7 +44,7 @@ workflows:
             - aws-ecr/build-and-push-image
           family: '${SERVICE_NAME}'
           cluster-name: '${ECS_ARN}'
-          container-image-name-updates: "container=rails,tag=latest"
+          container-image-name-updates: "container=rails,tag=${CIRCLE_SHA1}"
 
   
 #AWS_ECR_ACCOUNT_URL => ${アカウントID}.dkr.ecr.${リージョン}.amazonaws.com

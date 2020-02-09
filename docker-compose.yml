@@ -19,9 +19,7 @@ services:
       file: ./docker/mysql/password.yml
       service: password
   db:
-    build:
-      context: .
-      dockerfile: ./docker/mysql/Dockerfile
+    build: ./docker/mysql
     ports:
       - '3306:3306'
     volumes:
@@ -31,8 +29,7 @@ services:
       service: password
   nginx:
     build:
-      context: .
-      dockerfile: ./docker/nginx/Dockerfile
+      context: ./docker/nginx
     ports:
       - '80:80'
       #socketファイルの共有
@@ -51,3 +48,6 @@ services:
 volumes:
   db_data:
   sockets:
+
+
+#Circle Ciでcontextがうまくきかないので相対パスで
