@@ -33,8 +33,6 @@ resource "aws_alb_target_group" "of_ecs" {
   health_check {
     interval            = 60
     path                = "/posts"
-    // NOTE: defaultはtraffic-port
-    //port                = 80  
     protocol            = "HTTP"
     timeout             = 20
     unhealthy_threshold = 4

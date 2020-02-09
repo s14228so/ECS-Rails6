@@ -22,6 +22,7 @@ module "my_alb" {
 
 module "my_ecs" {
   source = "./modules/ecs"
+  alb_tg_arn = module.my_alb.alb_tg_arn
 }
 
 
