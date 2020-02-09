@@ -89,31 +89,33 @@
     "environment": [
       {
         "name": "DB_DATABASE",
-        "value": "${DB_DATABASE}"
-      },
-      {
-        "name": "DB_HOST",
-        "value": "${DB_HOST}"
+        "value": "terraform-ecs-rails"
       },
       {
         "name": "DB_PASSWORD",
-        "value": "${DB_PASSWORD}"
+        "value": "password"
       },
       {
         "name": "DB_USERNAME",
-        "value": "${DB_USERNAME}"
+        "value": "root"
       },
       {
         "name": "RAILS_ENV",
-        "value": "${RAILS_ENV}"
+        "value": "production"
       },
       {
         "name": "RAILS_LOG_TO_STDOUT",
-        "value": "${RAILS_LOG_TO_STDOUT}"
+        "value": "ENABLED"
+      }
+    ],
+    "secrets": [
+      {
+        "name": "DB_HOST",
+        "valueFrom": "DB_HOST"
       },
       {
         "name": "RAILS_MASTER_KEY",
-        "value": "${RAILS_MASTER_KEY}"
+        "valueFrom": "RAILS_MASTER_KEY"
       }
     ],
     "resourceRequirements": null,
@@ -127,7 +129,6 @@
       }
     ],
     "workingDirectory": "/app",
-    "secrets": null,
     "dockerSecurityOptions": null,
     "memory": null,
     "memoryReservation": null,

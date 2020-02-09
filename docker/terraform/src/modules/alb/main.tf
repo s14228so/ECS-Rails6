@@ -22,6 +22,7 @@ resource "aws_alb" "of_ecs" {
   enable_deletion_protection = false
 }
 
+
 // albのターゲットグループ
 resource "aws_alb_target_group" "of_ecs" {
   name     = "alb-tlb-g"

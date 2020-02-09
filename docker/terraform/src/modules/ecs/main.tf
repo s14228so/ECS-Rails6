@@ -4,7 +4,7 @@ resource "aws_ecs_cluster" "of_ecs_rails" {
 
 resource "aws_ecs_task_definition" "of_ecs_rails" {
   family                = "rails-nginx-task" #タスク名
-  container_definitions = file("task-definitions.json")
+  container_definitions = file("modules/ecs/container-definitions.json")
 
   volume {
     name      = "sockets"
@@ -20,12 +20,6 @@ resource "aws_ecs_task_definition" "of_ecs_rails" {
   }
 }
 
-resource "aws_ecs_service" "of_ecs_rails" {
-  name = "rails-service"
-  cluster = aws_ecs_cluster.of_ecs_rails.id
-  task_definition = aws_ecs_task_definition.docker_registry.arn
-  desired_count = 1
-}
 
 resource "aws_ecs_service" "of_ecs_rails" {
   name            = "rails-service"
@@ -36,7 +30,7 @@ resource "aws_ecs_service" "of_ecs_rails" {
   launch_type = "EC2"
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.foo.arn
+    target_group_arn = var.alb_tg_arn
     container_name   = "nginx"
     container_port   = 80
   }
