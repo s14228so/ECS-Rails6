@@ -23,11 +23,13 @@ module "my_alb" {
 module "my_ecs" {
   source = "./modules/ecs"
   alb_tg_arn = module.my_alb.alb_tg_arn
+  alb_sg_id = module.my_alb.alb_sg_id
 }
 
 
 
-# 
+
+
 # terraform init
 # terraform plan
 # terraform apply (--auto-approve)

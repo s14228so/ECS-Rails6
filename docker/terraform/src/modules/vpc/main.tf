@@ -75,6 +75,8 @@
     }
   }
 
+  
+
   # ルートテーブルとサブネットの関連付け
   resource "aws_route_table_association" "of_public_1a" {
     route_table_id = aws_route_table.of_public.id
