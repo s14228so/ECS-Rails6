@@ -16,7 +16,6 @@ workflows:
           dockerfile: ./docker/nginx/Dockerfile
           repo: nginx
           tag: "${CIRCLE_SHA1}"
-          workspace: .
           filters:
             branches:
               only: master
