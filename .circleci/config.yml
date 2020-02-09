@@ -24,6 +24,7 @@ workflows:
             - aws-ecr/build-and-push-image
           family: '${TASK_DEFINITION_NAME}'
           cluster-name: '${ECS_ARN}'
+          container-image-name-updates: "container=nginx,tag=latest"
   # Railsのデプロイ
   rails-deploy:
     jobs:
@@ -45,7 +46,7 @@ workflows:
             - aws-ecr/build-and-push-image
           family: '${SERVICE_NAME}'
           cluster-name: '${ECS_ARN}'
-          container-image-name-updates: "container=${SERVICE_NAME},tag=latest"
+          container-image-name-updates: "container=rails,tag=latest"
 
   
 #AWS_ECR_ACCOUNT_URL => ${アカウントID}.dkr.ecr.${リージョン}.amazonaws.com
