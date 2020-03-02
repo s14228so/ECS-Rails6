@@ -34,7 +34,7 @@ production:
 
 
 ```
-$ vi config.environments/development.rb
+$ vi config/environments/development.rb
 ```
 
 
