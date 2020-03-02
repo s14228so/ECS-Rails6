@@ -40,13 +40,13 @@ services:
       - sockets:/app/tmp/sockets
     depends_on: 
       - app
-  terraform:
-    build:
-      context: .
-      dockerfile: docker/terraform/Dockerfile
-    volumes:
-      - ./docker/terraform/src:/root/src
-    env_file: ./.env
+  #terraform:
+    #build:
+      #context: .
+      #dockerfile: docker/terraform/Dockerfile
+    #volumes:
+     # - ./docker/terraform/src:/root/src
+    #env_file: ./.env
 
 volumes:
   db_data:
