@@ -7,7 +7,7 @@ workflows:
   nginx-deploy:
     jobs:
       - aws-ecr/build-and-push-image:
-          account-url: AWS_ECR_ACCOUNT_URL
+          account-url: AWS_ECR_ACCOUNT_URL_NGINX
           region: AWS_REGION
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
@@ -21,15 +21,15 @@ workflows:
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
-          family: 'nginx-rails-app' # ECSのタスク定義名
-          cluster-name: '${ECS_ARN}'  #ECSのクラスターのARN
-          service-name: 'test'  #サービス名
+          family: "nginx-rails-app" # ECSのタスク定義名
+          cluster-name: "${ECS_ARN}" #ECSのクラスターのARN
+          service-name: "ecs-rails-service" #サービス名
           container-image-name-updates: "container=nginx,tag=${CIRCLE_SHA1}"
   # Railsのデプロイ
   rails-deploy:
     jobs:
       - aws-ecr/build-and-push-image:
-          account-url: AWS_ECR_ACCOUNT_URL
+          account-url: AWS_ECR_ACCOUNT_URL_RAILS
           region: AWS_REGION
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
@@ -43,10 +43,8 @@ workflows:
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
-          family: 'nginx-rails-app' # ECSのタスク定義名
-          cluster-name: '${ECS_ARN}' #ECSのクラスターのARN
-          service-name: 'test' #サービス名
+          family: "nginx-rails-app" # ECSのタスク定義名
+          cluster-name: "${ECS_ARN}" #ECSのクラスターのARN
+          service-name: "ecs-rails-service" #サービス名
           container-image-name-updates: "container=rails,tag=${CIRCLE_SHA1}"
-
-  
 #AWS_ECR_ACCOUNT_URL => ${アカウントID}.dkr.ecr.${リージョン}.amazonaws.com
