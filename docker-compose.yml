@@ -1,12 +1,12 @@
-version: '2'
+version: "2"
 services:
   app:
     build:
       context: .
       dockerfile: ./docker/rails/Dockerfile
-    command: bundle exec puma -C config/puma.rb 
+    command: bundle exec puma -C config/puma.rb
     ports:
-      - '3000:3000'
+      - "3000:3000"
     volumes:
       - .:/app
       - /var/tmp
@@ -23,10 +23,10 @@ services:
       context: .
       dockerfile: ./docker/mysql/Dockerfile
     ports:
-      - '3306:3306'
+      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-    extends:  
+    extends:
       file: ./docker/mysql/password.yml
       service: password
   nginx:
@@ -34,11 +34,11 @@ services:
       context: .
       dockerfile: ./docker/nginx/Dockerfile
     ports:
-      - '80:80'
+      - "80:80"
       #socketファイルの共有
-    volumes: 
+    volumes:
       - sockets:/app/tmp/sockets
-    depends_on: 
+    depends_on:
       - app
 
 volumes:
